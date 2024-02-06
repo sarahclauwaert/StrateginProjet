@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectez-vous</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="bodylogreg">
+    <div class="form-container">
+        <h2>Connectez-vous</h2>
+        <% if (typeof error !== 'undefined' && error !== null) { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+        <% } %>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="email"> Adresse mail: </label>
+                <input type="email" id="email" name="email" placeholder="Entre ton adresse mail:" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe:</label>
+                <input type="password" name="password" id="password" placeholder="password" required>
+            </div>
+            <button type="submit" class="submit-btn"> Se connecter </button>
+        </form>
+        <% if (typeof token !== 'undefined' && token !== null) { %>
+            <div class="token-info">
+                <p>Le token est générer, appuie sur le bouton pour le voir</p>
+                <button onclick="showToken()" class="submit-btn"> Voir le Token </button>
+                <div id="token-display" style="display: none;">
+                    <p><strong>Token:</strong> <%= token.substring(0, 30) %></p>
+                    <form action="/user" method="get">
+                        <button type="submit" class="submit-btn"> Acceder à la liste des utilisateurs </button>
+                    </form>
+                </div>
+                <script>
+                    function showToken() {
+                        document.getElementById('token-display').style.display = 'block';
+                    }
+                </script>
+            </div>
+        <% } %>
+    </div>
+
+</body>
+</html>
